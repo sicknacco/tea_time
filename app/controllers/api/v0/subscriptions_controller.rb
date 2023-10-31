@@ -14,6 +14,8 @@ class Api::V0::SubscriptionsController < ApplicationController
     if sub[:status] == 'active'
       sub.update!(status: 'inactive')
       render json: SubscriptionSerializer.new(sub), status: 200
+    else
+      render json: { error: 'Subscription is already inactive' }, status: 400
     end
   end
 
