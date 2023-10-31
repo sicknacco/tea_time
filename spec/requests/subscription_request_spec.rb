@@ -176,6 +176,10 @@ RSpec.describe "POST Subscription", type: :request do
         expect(response.status).to eq(400)
         
         error = JSON.parse(response.body, symbolize_names: true)
+     
+        expect(error).to be_a(Hash)
+        expect(error).to have_key(:error)
+        expect(error[:error]).to eq('Subscription is already inactive')
       end
     end
   end
