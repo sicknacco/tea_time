@@ -30,13 +30,13 @@ RSpec.describe "POST Subscription", type: :request do
       expect(sub[:data][:id]).to be_a(String)
       expect(sub[:data]).to have_key(:type)
       expect(sub[:data][:type]).to eq('subscription')
-      
+
       expect(sub[:data]).to have_key(:attributes)
       expect(sub[:data][:attributes]).to be_a(Hash)
       expect(sub[:data][:attributes]).to have_key(:title)
       expect(sub[:data][:attributes][:title]).to be_a(String)
       expect(sub[:data][:attributes]).to have_key(:price)
-      expect(sub[:data][:attributes][:price]).to be_a(Float)
+      expect(sub[:data][:attributes][:price]).to be_a(String)
       expect(sub[:data][:attributes]).to have_key(:status)
       expect(sub[:data][:attributes][:status]).to be_a(String)
       expect(sub[:data][:attributes]).to have_key(:frequency)
