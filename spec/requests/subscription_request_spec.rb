@@ -74,7 +74,7 @@ RSpec.describe "POST Subscription", type: :request do
    
       expect(error).to be_a(Hash)
       expect(error).to have_key(:error)
-      expect(error[:error]).to eq("Customer must exist")
+      expect(error[:error]).to eq("Customer must exist and Customer can't be blank")
     end
 
     it 'returns an error if tea_id is missing' do
@@ -99,7 +99,7 @@ RSpec.describe "POST Subscription", type: :request do
 
       expect(error).to be_a(Hash)
       expect(error).to have_key(:error)
-      expect(error[:error]).to eq("Tea must exist")
+      expect(error[:error]).to eq("Tea must exist and Tea can't be blank")
     end
 
     it 'returns an error if another attribute is missing' do
@@ -108,7 +108,7 @@ RSpec.describe "POST Subscription", type: :request do
 
       payload = {
         title: 'The Good One',
-        price: 10.99,
+        price: '',
         status: 'active',
         frequency: 'bi-monthly',
         customer_id: customer.id,
@@ -118,10 +118,14 @@ RSpec.describe "POST Subscription", type: :request do
 
       post '/api/v0/subscriptions', headers: headers, params: JSON.generate(payload)
 
-      expect(response).to be_successful
-      expect(response.status).to eq(201)
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
 
-      sub = JSON.parse(response.body, symbolize_names: true)
+      error = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error).to be_a(Hash)
+      expect(error).to have_key(:error)
+      expect(error[:error]).to eq("Price can't be blank")
     end
   end
 end
