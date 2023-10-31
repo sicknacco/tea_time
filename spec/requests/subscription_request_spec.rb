@@ -183,4 +183,15 @@ RSpec.describe "POST Subscription", type: :request do
       end
     end
   end
+
+  describe 'Get all subscriptions for a customer' do
+    describe 'Happy Path' do
+      it 'returns all subscriptions for a customer' do
+        
+      end
+    end
+
+    describe 'Sad Path' do
+    end
+  end
 end
