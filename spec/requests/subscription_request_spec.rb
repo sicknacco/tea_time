@@ -128,4 +128,20 @@ RSpec.describe "POST Subscription", type: :request do
       expect(error[:error]).to eq("Price can't be blank")
     end
   end
+
+  describe 'Cancel Subscription' do
+    it 'cancels a subscription' do
+      customer = create(:customer)
+      tea = create(:tea)
+      subscription = create(:subscription, customer_id: customer.id, tea_id: tea.id, status: 'active')
+
+      put "/api/v0/subscriptions/#{subscription.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      canceled_sub = JSON.parse(response.body, symbolize_names: true)
+      expect(canceled_sub).to be_a(Hash)
+    end
+  end
 end
