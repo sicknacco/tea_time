@@ -4,7 +4,7 @@ class Api::V0::SubscriptionsController < ApplicationController
     if sub.save
       render json: SubscriptionSerializer.new(sub), status: 201
     else
-      "sad path"
+      render json: { error: sub.errors.full_messages.to_sentence }, status: 400
     end
   end
 
