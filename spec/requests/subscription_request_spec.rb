@@ -238,6 +238,35 @@ RSpec.describe "POST Subscription", type: :request do
     end
 
     describe 'Sad Path' do
+      it 'returns an error if customer does not exist' do
+
+        get '/api/v0/customers/000000/subscriptions'
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+        
+        error = JSON.parse(response.body, symbolize_names: true)
+
+        expect(error).to be_a(Hash)
+        expect(error).to have_key(:error)
+        expect(error[:error]).to eq("Couldn't find Customer with 'id'=000000")
+      end
+
+      it 'returns an empty array if customer has no subscriptions' do
+        customer = create(:customer)
+
+        get "/api/v0/customers/#{customer.id}/subscriptions"
+
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
+
+        subs = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(subs).to be_a(Hash)
+        expect(subs).to have_key(:data)
+        expect(subs[:data]).to be_a(Array)
+        expect(subs[:data]).to eq([])
+      end
     end
   end
 end
