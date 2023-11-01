@@ -252,8 +252,20 @@ RSpec.describe "POST Subscription", type: :request do
         expect(error[:error]).to eq("Couldn't find Customer with 'id'=000000")
       end
 
-      xit 'returns an error if customer has no subscriptions' do
+      it 'returns an empty array if customer has no subscriptions' do
+        customer = create(:customer)
 
+        get "/api/v0/customers/#{customer.id}/subscriptions"
+
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
+
+        subs = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(subs).to be_a(Hash)
+        expect(subs).to have_key(:data)
+        expect(subs[:data]).to be_a(Array)
+        expect(subs[:data]).to eq([])
       end
 
       xit 'returns an error if tea does not exist' do
