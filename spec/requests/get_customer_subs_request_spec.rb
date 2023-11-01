@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "POST Subscription", type: :request do
+RSpec.describe "GET '/customers/:id/subscriptions", type: :request do
   describe 'Get all subscriptions for a customer' do
     describe 'Happy Path' do
       it 'returns all subscriptions for a customer' do
