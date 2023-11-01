@@ -267,10 +267,6 @@ RSpec.describe "POST Subscription", type: :request do
         expect(subs[:data]).to be_a(Array)
         expect(subs[:data]).to eq([])
       end
-
-      xit 'returns an error if tea does not exist' do
-
-      end
     end
   end
 end
