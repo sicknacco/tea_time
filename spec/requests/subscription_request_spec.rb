@@ -238,6 +238,18 @@ RSpec.describe "POST Subscription", type: :request do
     end
 
     describe 'Sad Path' do
+      it 'returns an error if customer does not exist' do
+        tea = create(:tea)
+        sub = create(:subscription, customer_id: 000000, tea_id: tea.id, status: 'active')
+
+        get '/api/v0/customers/000000/subscriptions'
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+
+        error = JSON.parse(response.body, symbolize_names: true)
+        require 'pry'; binding.pry
+      end
     end
   end
 end
