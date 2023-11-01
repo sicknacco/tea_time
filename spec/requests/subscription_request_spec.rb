@@ -193,10 +193,10 @@ RSpec.describe "POST Subscription", type: :request do
         tea3 = create(:tea)
         tea4 = create(:tea)
 
-        sub1 = create(:subscription, customer_id: customer.customer.id, tea_id: tea1.id, status: 'active')
-        sub2 = create(:subscription, customer_id: customer.customer.id, tea_id: tea2.id, status: 'active')
-        sub3 = create(:subscription, customer_id: customer.customer.id, tea_id: tea3.id, status: 'inactive')
-        sub4 = create(:subscription, customer_id: customer.customer.id, tea_id: tea4.id, status: 'inactive')
+        sub1 = create(:subscription, customer_id: customer.id, tea_id: tea1.id, status: 'active')
+        sub2 = create(:subscription, customer_id: customer.id, tea_id: tea2.id, status: 'active')
+        sub3 = create(:subscription, customer_id: customer.id, tea_id: tea3.id, status: 'inactive')
+        sub4 = create(:subscription, customer_id: customer.id, tea_id: tea4.id, status: 'inactive')
 
         get "/api/v0/customers/#{customer.id}/subscriptions"
 
