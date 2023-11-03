@@ -161,3 +161,5 @@ If given more time, I would refactor that action to allow updating to all releva
 
 ## Planning Tools
 - [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) ](https://github.com/users/sicknacco/projects/10)
+
+<img src="Notebook.jpg">
