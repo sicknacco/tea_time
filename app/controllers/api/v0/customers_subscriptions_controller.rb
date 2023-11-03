@@ -1,4 +1,4 @@
-class Api::V0::UsersSubscriptionsController < ApplicationController
+class Api::V0::CustomersSubscriptionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_record
   def index
     customer = Customer.find(params[:customer_id])
